@@ -1,0 +1,97 @@
+        <div class="content">
+            <p class="breadcrum">Recetas / <span>Crear nueva receta</span></p>
+            <form class="section" action="/insertarReceta" method="post">
+                <h2 class="section-title">Crear Receta</h2>
+                <div class="box">
+                    <div class="form-ing__inputgroup">
+                         <label class="form-ing__label" for="recetaname">Nombre de Receta:</label>
+                         <input class="form-ing__input rec-name" type="text" name="recetaname" id="recetaname">
+                    </div>
+                    <div class="form-ing">
+                        <div class="form-ing__inputgroup nombre">
+                            <label class="form-ing__label" for="tiempo">Tiempo de preparacion (en minutos)</label>
+                            <input class="form-ing__input" id="tiempo" type="text" name="tiempo">
+                        </div>
+                        <div class="form-ing__inputgroup cantidad">
+                            <label class="form-ing__label" for="porciones">Cantidad de Porciones</label>
+                            <input class="form-ing__input" id="porciones" type="text" name="porciones">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-pre">
+                        <label for="productos">Elija el producto al que pertenece la receta</label>
+                        <select name="producto" id="productos">
+                            <option selected value="0">Ninguno</option>
+                            #foreach($p in $productos)
+                                <option value=$p.getCodigo()>$p.getNombre()</option>
+                            #end
+                        </select>
+                    </div>
+                    <div class="form-pre">
+                        <label for="preparacion">Seleccione si la receta tiene preparacion base</label>
+                        <select name="preparacion" id="preparacion">
+                            <option selected value="null">Ninguna</option>
+                            #foreach($r in $recetasbase)
+                                <option value=$r.getId()>$r.getNombre()</option>
+                            #end
+                        </select>
+                    </div>
+                    <hr>
+                    <br>
+                    <h3 class="box__title">Cargar ingredientes</h3>
+                    <div class="form-ing">
+                        <div class="form-ing__inputgroup nombre">
+                            <label class="form-ing__label" for="ingrediente">Seleccione ingrediente:</label>
+                            <select class="form-ing__input" name="ingrediente[]" id="ingrediente">
+                                #foreach($i in $ingredientes)
+                                    <option value=$i.getCodigo()>$i.getNombre()</option>
+                                #end
+                            </select>
+                        </div>
+                        <div class="form-ing__inputgroup cantidad">
+                            <label class="form-ing__label" for="cantidad">Cantidad</label>
+                            <input class="form-ing__input" id="cantidad" type="text" name="cantidad[]">
+                        </div>
+                        <div class="form-ing__inputgroup unidad">
+                            <label class="form-ing__label" for="unidad">Unidad</label>
+                            <input class="form-ing__input" id="unidad" type="text" name="unidad[]">
+                        </div>
+                        <div class="form-ing__inputgroup boton">
+                            <p>&nbsp;</p>
+                            <button class="form-ing__btn" id="add-ing">Agregar</button>
+                        </div>
+                    </div>
+                    <div id="ingredientes">
+                        <div class="ingredients-group">
+                            <!--                             <button class="ingredients-group__btn">
+                                <span class="material-symbols-outlined ingredients-group__icon">
+                                    delete_forever
+                                </span>
+                            </button>
+                            <p class="ingredients-group__name">
+                                <input type="text" name="nombre[]">
+                                <input type="text" name="cantidad[]">
+                                <input type="text" name="unidad[]">
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <br>    
+                <div class="box">
+                    <h3 class="box__title">Cargar pasos</h3>
+                    <div class="form-steps">
+                        <div class="form-steps-inputgroup">
+                            <label for="ta-instruccion" class="form-steps__label">Instrucción</label>
+                            <textarea class="form-steps__ta" name="ta-instruccion[]" id="ta-instruccion" cols="50"
+                                rows="10">
+                            </textarea>
+                            <button class="form-ing__btn" id="add-rec">Agregar</button>
+                        </div>
+                    </div>
+                    <div id="steps">
+                    </div>
+                </div>
+                <input type="submit" class="form-ing__btn form-ing__btn--save" value="Guardar Receta">
+            </form>
+        </div>

@@ -1,0 +1,34 @@
+<center>
+    <h1>Receta: $!receta.getNombre()</h1>
+    <br><br>
+    <h2>Ingredientes</h2>
+    <br><br>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Unidad</th>
+        </tr>
+        #foreach($i in $receta.getIngredientes())
+        <tr>
+            <td>$i.getNombre()</td>
+            <td>$i.getCantidad()</td>
+            <td>$i.getUnidad()</td>
+        </tr>
+        #end
+    </table>
+    <h2>Pasos</h2>
+    <br><br>
+    <table>
+        <tr>
+            <th>Número</th>
+            <th>Instrucción</th>
+        </tr>
+        #foreach($i in $receta.getPasos())
+        <tr>
+            <td>$i.getNumero()</td>
+            <td>$i.getInstruccion()</td>
+        </tr>
+        #end
+    </table>
+<center>

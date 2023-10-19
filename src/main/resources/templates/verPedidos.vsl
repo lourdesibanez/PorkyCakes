@@ -1,0 +1,29 @@
+        <div class="content">
+            <p class="breadcrum">Pedidos / <span> Ver Pedidos</span></p>
+            <div class="section">
+                <h2 class="section-title">Pedidos</h2>
+                <div class="box box__pedidos">
+                    <table class="table">
+                        <tr class="table__row">
+                            <th class="table__th">Cliente</th>
+                            <th class="table__th">Fecha del Pedido</th>
+                            <th class="table__th">Fecha de Entrega</th>
+                            <th class="table__th">Precio</th>
+                            <th class="table__th">Estado</th>
+                        </tr>
+                        #foreach($p in $pedidos)    
+                            <tr class="table__row">
+                                <td class="table__td">$p.getNombre_completo_usuario()</td>
+                                <td class="table__td">$p.getFecha_pedido()</td>
+                                <td class="table__td">$p.getFecha_entrega()</td>
+                                <td class="table__td">$$p.getPrecio()</td>
+                                <td class="table__td"><p class="completado">$p.getNombre_estado()</p></td>
+                                <td class="table__td">
+                                </td>
+                            </tr>
+                        #end
+                    </table>
+                </div>
+            </div>
+        </div>
+<script src="estados.js"></script>
