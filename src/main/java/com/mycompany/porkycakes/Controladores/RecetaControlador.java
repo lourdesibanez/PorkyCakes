@@ -94,7 +94,7 @@ public class RecetaControlador {
             rbxr.setId_receta_base(Integer.parseInt(receta_base));
             rbxrDAO.insert(rbxr);
         }
-        
+        //cuando carga el formulario esto hace que vuelva a la pagina principal para seguir cargando otro stock
         response.redirect("/crearReceta");
         return null;
     };

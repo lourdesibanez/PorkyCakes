@@ -13,6 +13,7 @@ import org.sql2o.Connection;
  * @author Martin
  */
 public class IngredienteDAO {
+    
     public List<Ingrediente> selectAllIngredientes(){
         String selectAllSQL = "SELECT * FROM INGREDIENTE;";
         List<Ingrediente> ingredientes = null;
@@ -22,5 +23,14 @@ public class IngredienteDAO {
             e.printStackTrace();
         }
         return ingredientes;
+    }
+    
+    public void updateStock(int cantidad, int codigo){
+        String updateSQL = "UPDATE ingrediente SET cantidad =: cantidad WHERE codigo =: codigo";
+        try(Connection con = Sql2oDAO.getSql2o().open()){
+            con.createQuery(updateSQL).executeUpdate();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
