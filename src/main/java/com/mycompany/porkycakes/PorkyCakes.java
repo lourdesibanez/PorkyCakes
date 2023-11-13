@@ -12,6 +12,7 @@ package com.mycompany.porkycakes;
 import com.mycompany.porkycakes.Controladores.PedidoControlador;
 import com.mycompany.porkycakes.Controladores.RecetaControlador;
 import com.mycompany.porkycakes.Controladores.IngredienteControlador;
+import com.mycompany.porkycakes.Controladores.LoginControlador;
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
@@ -27,5 +28,9 @@ public class PorkyCakes {
         
         get("/cargarStock", IngredienteControlador.cargarStock);
         post("/actualizarStock", IngredienteControlador.actualizarStock);
+        
+        get("/login", LoginControlador.iniciarSesion);
+        post("/autenticarUsuario", LoginControlador.autenticarUsuario);
+                
     }
 }

@@ -40,6 +40,7 @@
             <artifactId>velocity</artifactId>
             <version>1.7</version>
         </dependency>
+        <!--Singleton SQL2O -->
         <dependency>
             <groupId>org.sql2o</groupId>
             <artifactId>sql2o</artifactId>
@@ -49,6 +50,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.37</version>
+        </dependency>
+       <!-- Patron Facade-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.8.0-beta0</version>
         </dependency>
     </dependencies>
     <name>ProyectoPorkyCakes</name>

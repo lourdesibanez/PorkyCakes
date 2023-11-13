@@ -40,7 +40,19 @@ public class UsuarioDAO {
         return nombre + " " + apellido;
     }
     
-    
-    
+    public boolean autenticarUsuario(String nombre_usuario, String contrasena) {
+        String selectSQL = "SELECT * FROM USUARIO WHERE nombre_usuario = :nombre_usuario AND contrasena = :contrasena;";
+        List<Usuario> usuarios = null;
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            usuarios = con.createQuery(selectSQL)
+                .addParameter("nombre_usuario", nombre_usuario)
+                .addParameter("contrasena", contrasena)
+                .executeAndFetch(Usuario.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return usuarios != null && !usuarios.isEmpty();
+    }
     
 }
