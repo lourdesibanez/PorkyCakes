@@ -12,7 +12,8 @@ import lombok.Data;
 
 @Data
 public class Usuario {
-    private String nombre_usuario;
-    private String nombre;
-     private String apellido;
+    
+    private String nombre_usuario, contrasena;
+    private String apellido, nombre;
+    private int id_rol;
 }

@@ -8,35 +8,39 @@ package com.mycompany.porkycakes.Controladores;
  *
  * @author Luly
  */
-import com.mycompany.porkycakes.DAO.IngredienteDAO;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.Route;
+import com.mycompany.porkycakes.DAO.*;
+import spark.*;
 import spark.template.velocity.VelocityTemplateEngine;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import com.mycompany.porkycakes.Objetos.Ingrediente;
 
 public class ListaControlador {
     public static Route generarListaCompras = (Request request, Response response) -> {
-       
-       IngredienteDAO iDAO = new IngredienteDAO();
-  
-       //para mandarle todos los ingredientes asi elije a cual cargarle stock
-       List<Ingrediente> ingredientes = iDAO.selectAllIngredientes();
-       
-       ArrayList<Ingrediente> ingredienteLista = new ArrayList<>();
-       for(Ingrediente i : ingredientes){
-           int cantidad = i.getCantidad();
-           int umbralMinimo = i.getUmbralMinimo();
-           if(cantidad < umbralMinimo){
-               ingredienteLista.add(i);
+       if(UsuarioDAO.getUsuario() != null){
+           if(UsuarioDAO.getRol() == 1){
+                IngredienteDAO iDAO = new IngredienteDAO();
+
+                //para mandarle todos los ingredientes asi elije a cual cargarle stock
+                List<Ingrediente> ingredientes = iDAO.selectAllIngredientes();
+
+                ArrayList<Ingrediente> ingredienteLista = new ArrayList<>();
+                for(Ingrediente i : ingredientes){
+                    int cantidad = i.getCantidad();
+                    int umbralMinimo = i.getUmbralMinimo();
+                    if(cantidad < umbralMinimo){
+                        ingredienteLista.add(i);
+                    }
+                }
+                HashMap model = new HashMap();
+                model.put("ingredientes",ingredienteLista);
+                return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/layout.vsl"));
+           }else{
+               HashMap model = new HashMap();
+               return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/sinPermisos.vsl"));
            }
-       }
-       HashMap model = new HashMap();
-       model.put("ingredientes",ingredienteLista);
-       return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/layout.vsl"));
+        }else{
+            response.redirect("/iniciarSesion");
+            return null;
+            }
     };
 }

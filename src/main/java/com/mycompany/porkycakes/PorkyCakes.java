@@ -9,13 +9,8 @@ package com.mycompany.porkycakes;
  * @author Luly
  */
 
-import com.mycompany.porkycakes.Controladores.PedidoControlador;
-import com.mycompany.porkycakes.Controladores.RecetaControlador;
-import com.mycompany.porkycakes.Controladores.IngredienteControlador;
-import com.mycompany.porkycakes.Controladores.LoginControlador;
-import static spark.Spark.get;
-import static spark.Spark.post;
-import static spark.Spark.staticFiles;
+import com.mycompany.porkycakes.Controladores.*;
+import static spark.Spark.*;
 
 public class PorkyCakes {
 
@@ -31,6 +26,8 @@ public class PorkyCakes {
         
         get("/login", LoginControlador.iniciarSesion);
         post("/autenticarUsuario", LoginControlador.autenticarUsuario);
+        
+        get("/generarListaCompras", ListaControlador.generarListaCompras);
                 
     }
 }

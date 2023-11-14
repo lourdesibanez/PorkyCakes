@@ -8,25 +8,30 @@ package com.mycompany.porkycakes.Controladores;
  *
  * @author Luly
  */
-import com.mycompany.porkycakes.DAO.IngredienteDAO;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.Route;
+import spark.*;
 import spark.template.velocity.VelocityTemplateEngine;
-import java.util.HashMap;
-import java.util.List;
-import com.mycompany.porkycakes.Objetos.Ingrediente;
+import java.util.*;
+import com.mycompany.porkycakes.Objetos.*;
+import com.mycompany.porkycakes.DAO.*;
 
 public class IngredienteControlador {
    public static Route cargarStock = (Request request, Response response) ->{
-       IngredienteDAO iDAO = new IngredienteDAO();
-    
-       //para mandarle todos los ingredientes asi elije a cual cargarle stock
-       List<Ingrediente> ingredientes = iDAO.selectAllIngredientes();
-       HashMap model = new HashMap();
-       model.put("ingredientes",ingredientes);
-       return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/layout.vsl"));
+       if(UsuarioDAO.getUsuario() != null){
+           if(UsuarioDAO.getRol() == 1){
+                IngredienteDAO iDAO = new IngredienteDAO();
+                //para mandarle todos los ingredientes asi elije a cual cargarle stock
+                List<Ingrediente> ingredientes = iDAO.selectAllIngredientes();
+                HashMap model = new HashMap();
+                model.put("ingredientes",ingredientes);
+                return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/layout.vsl"));
+           }else{
+               HashMap model = new HashMap();
+               return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/sinPermisos.vsl"));
+           }
+       }else{
+           response.redirect("/iniciarSesion");
+           return null;
+       }
    };
            
     public static Route actualizarStock = (Request request, Response response) ->{

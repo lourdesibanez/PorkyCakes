@@ -13,7 +13,19 @@ import java.util.List;
 import org.sql2o.Connection;
 
 public class UsuarioDAO {
-    public List<Usuario> selectAllPedidos(){
+    protected static Usuario usuario;
+    
+    //para que si el usuario no esta logueado retorne null y si esta logueado que te retorne ese usuario
+    public static Usuario getUsuario(){
+        return usuario;
+    }
+    
+    public static int getRol(){
+        return usuario.getId_rol();
+    }
+    
+    
+    public List<Usuario> selectAllUsuarios(){
         String selectAllSQL = "SELECT * FROM USUARIO;";
         List<Usuario> usuarios = null;
         try(Connection con = Sql2oDAO.getSql2o().open()){
@@ -51,7 +63,9 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+        if(usuarios != null){
+            usuarios.get(0);
+        }
         return usuarios != null && !usuarios.isEmpty();
     }
     

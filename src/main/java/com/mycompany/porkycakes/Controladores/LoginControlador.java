@@ -22,10 +22,11 @@ public class LoginControlador {
     public static Route iniciarSesion = (Request request, Response response) -> {
         // Aquí puedes renderizar la vista de inicio de sesión (.vsl) utilizando Velocity.
         // Puedes pasar cualquier dato necesario a la vista usando el objeto Model.
-
+        
         HashMap model = new HashMap();
         model.put("template", "templates/login.vsl");
-        return VelocityTemplateEngine.render(new ModelAndView(model, "login.vsl"));
+        return new VelocityTemplateEngine().render(new ModelAndView(model, "login.vsl"));
+        
     };
     
      public static Route autenticarUsuario = (Request request, Response response) -> {
@@ -44,3 +45,4 @@ public class LoginControlador {
     };
 
 }
+

@@ -4,24 +4,10 @@
  */
 package com.mycompany.porkycakes.Controladores;
 
-import com.mycompany.porkycakes.DAO.IngredienteDAO;
-import com.mycompany.porkycakes.DAO.IngredientesXRecetaDAO;
-import com.mycompany.porkycakes.DAO.PasoDAO;
-import com.mycompany.porkycakes.DAO.ProductoDAO;
-import com.mycompany.porkycakes.DAO.RecetaDAO;
-import com.mycompany.porkycakes.DAO.RecetasBaseXRecetaDAO;
-import com.mycompany.porkycakes.Objetos.Ingrediente;
-import com.mycompany.porkycakes.Objetos.Receta;
-import com.mycompany.porkycakes.Objetos.Paso;
-import com.mycompany.porkycakes.Objetos.IngredientesXReceta;
-import com.mycompany.porkycakes.Objetos.Producto;
-import com.mycompany.porkycakes.Objetos.RecetasBaseXReceta;
-import java.util.HashMap;
-import java.util.List;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.Route;
+import com.mycompany.porkycakes.DAO.*;
+import com.mycompany.porkycakes.Objetos.*;
+import java.util.*;
+import spark.*;
 import spark.template.velocity.VelocityTemplateEngine;
 
 /**
@@ -30,22 +16,32 @@ import spark.template.velocity.VelocityTemplateEngine;
  */
 public class RecetaControlador {
     public static Route crearReceta = (Request request, Response response) -> {
-        ProductoDAO pDAO = new ProductoDAO();
-        List<Producto> productos = pDAO.selectAllProductos();
-        
-        RecetaDAO rDAO = new RecetaDAO();
-        List<Receta> recetasBase = rDAO.selectRecetasBase();
-        
-        IngredienteDAO iDAO = new IngredienteDAO();
-        List<Ingrediente> ingredientes = iDAO.selectAllIngredientes();
-        
-        HashMap model = new HashMap();
-        model.put("productos",productos);
-        model.put("recetasbase", recetasBase);
-        model.put("ingredientes",ingredientes);
-        model.put("template","templates/cargarReceta.vsl");
+        if(UsuarioDAO.getUsuario() != null){
+           if(UsuarioDAO.getRol() == 1){
+                ProductoDAO pDAO = new ProductoDAO();
+                List<Producto> productos = pDAO.selectAllProductos();
 
-        return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/layout.vsl"));
+                RecetaDAO rDAO = new RecetaDAO();
+                List<Receta> recetasBase = rDAO.selectRecetasBase();
+
+                IngredienteDAO iDAO = new IngredienteDAO();
+                List<Ingrediente> ingredientes = iDAO.selectAllIngredientes();
+
+                HashMap model = new HashMap();
+                model.put("productos",productos);
+                model.put("recetasbase", recetasBase);
+                model.put("ingredientes",ingredientes);
+                model.put("template","templates/cargarReceta.vsl");
+
+                return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/layout.vsl"));
+           }else{
+               HashMap model = new HashMap();
+               return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/sinPermisos.vsl"));
+           }
+        }else{
+            response.redirect("/iniciarSesion");
+            return null;
+        }
     };
     
     public static Route insertarReceta = (Request request, Response response) -> {
