@@ -20,12 +20,10 @@ import java.util.HashMap;
 public class LoginControlador {
  
     public static Route iniciarSesion = (Request request, Response response) -> {
-        // Aquí puedes renderizar la vista de inicio de sesión (.vsl) utilizando Velocity.
-        // Puedes pasar cualquier dato necesario a la vista usando el objeto Model.
         
         HashMap model = new HashMap();
         model.put("template", "templates/login.vsl");
-        return new VelocityTemplateEngine().render(new ModelAndView(model, "login.vsl"));
+        return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/login.vsl"));
         
     };
     
@@ -37,7 +35,7 @@ public class LoginControlador {
             if (usuarioDAO.autenticarUsuario(username, password)) {
                 request.session(true);
                 request.session().attribute("username", username);
-                response.redirect("/dashboard");
+                response.redirect("/login.vsl");
             } else {
                 return "Credenciales incorrectas";
             }

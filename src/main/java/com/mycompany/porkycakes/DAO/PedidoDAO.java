@@ -14,10 +14,13 @@ import java.util.List;
 import org.sql2o.Connection;
 
 public class PedidoDAO {
+    
+    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+    
     public List<Pedido> selectAllPedidos(){
         String selectAllSQL = "SELECT * FROM PEDIDO;";
         List<Pedido> pedidos = null;
-        try(Connection con = Sql2oDAO.getSql2o().open()){
+        try(Connection con = bdDAO.getConnection()){
             pedidos = con.createQuery(selectAllSQL).executeAndFetch(Pedido.class);
         } catch(Exception e){
             e.printStackTrace();

@@ -39,7 +39,7 @@ public class RecetaControlador {
                return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/sinPermisos.vsl"));
            }
         }else{
-            response.redirect("/iniciarSesion");
+            response.redirect("/login");
             return null;
         }
     };

@@ -8,9 +8,10 @@ package com.mycompany.porkycakes.DAO;
  *
  * @author Luly
  */
+import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-public class Sql2oDAO {
+public class Sql2oDAO extends BaseDeDatosDAO{
     protected static Sql2o sql2o;
     
     public static Sql2o getSql2o(){
@@ -18,5 +19,10 @@ public class Sql2oDAO {
             sql2o = new Sql2o("jdbc:mysql://localhost:3306/porkydb", "root", "");
         }
         return sql2o;
+    }
+
+    @Override
+    public Connection getConnection() {
+        return getSql2o().open();
     }
 }

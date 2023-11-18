@@ -13,10 +13,13 @@ import org.sql2o.Connection;
  * @author Luly
  */
 public class ProductosXPedidoDAO {
+    
+    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+    
     public List<ProductosXPedido> getProductosXPedido(int numero){
         String selectSQL = "SELECT * FROM PRODUCTOSXPEDIDO WHERE numero_pedido = :numero;";
         List<ProductosXPedido> pxp = null;
-        try(Connection con = Sql2oDAO.getSql2o().open()){
+        try(Connection con = bdDAO.getConnection()){
             pxp = con.createQuery(selectSQL).addParameter("numero",numero).executeAndFetch(ProductosXPedido.class);
         } catch(Exception e){
             e.printStackTrace();

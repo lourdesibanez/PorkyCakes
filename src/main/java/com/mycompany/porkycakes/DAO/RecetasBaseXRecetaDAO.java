@@ -12,11 +12,14 @@ import org.sql2o.Connection;
  * @author Martin
  */
 public class RecetasBaseXRecetaDAO {
+    
+    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+    
     public void insert(RecetasBaseXReceta rbxr){
         String sql = "INSERT INTO RECETASBASEXRECETA "
             + "VALUES(:id_receta_principal, :id_receta_base)";
 
-            try (Connection con = Sql2oDAO.getSql2o().open()) {
+            try (Connection con = bdDAO.getConnection()) {
             con.createQuery(sql)
             .addParameter("id_receta_principal" , rbxr.getId_receta_principal())
             .addParameter("id_receta_base" , rbxr.getId_receta_base())

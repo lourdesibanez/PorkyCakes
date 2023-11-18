@@ -13,10 +13,13 @@ import org.sql2o.Connection;
  * @author Luly
  */
 public class EstadoDAO {
+    
+    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+    
     public List<Estado> selectAllEstados(){
         String selectAllSQL = "SELECT * FROM ESTADO;";
         List<Estado> estados = null;
-        try(Connection con = Sql2oDAO.getSql2o().open()){
+        try(Connection con = bdDAO.getConnection()){
             estados = con.createQuery(selectAllSQL).executeAndFetch(Estado.class);
         } catch(Exception e){
             e.printStackTrace();
@@ -28,7 +31,7 @@ public class EstadoDAO {
         String selectAllSQL = "SELECT * FROM ESTADO WHERE id = :id;";
         List<Estado> estados = null;
         
-        try(Connection con = Sql2oDAO.getSql2o().open()){
+        try(Connection con = bdDAO.getConnection()){
             estados = con.createQuery(selectAllSQL).addParameter("id",id).executeAndFetch(Estado.class);
         } catch(Exception e){
             e.printStackTrace();

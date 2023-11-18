@@ -14,10 +14,12 @@ import org.sql2o.Connection;
  */
 public class IngredienteDAO {
     
+    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+    
     public List<Ingrediente> selectAllIngredientes(){
         String selectAllSQL = "SELECT * FROM INGREDIENTE;";
         List<Ingrediente> ingredientes = null;
-        try(Connection con = Sql2oDAO.getSql2o().open()){
+        try(Connection con = bdDAO.getConnection()){
             ingredientes = con.createQuery(selectAllSQL).executeAndFetch(Ingrediente.class);
         } catch(Exception e){
             e.printStackTrace();
@@ -27,7 +29,7 @@ public class IngredienteDAO {
     
     public void updateStock(int cantidad, int codigo){
         String updateSQL = "UPDATE ingrediente SET cantidad =: cantidad WHERE codigo =: codigo";
-        try(Connection con = Sql2oDAO.getSql2o().open()){
+        try(Connection con = bdDAO.getConnection()){
             con.createQuery(updateSQL).executeUpdate();
         } catch(Exception e){
             e.printStackTrace();
