@@ -10,6 +10,7 @@ import spark.Route;
 import spark.template.velocity.VelocityTemplateEngine;
 import spark.ModelAndView;
 import com.mycompany.porkycakes.DAO.UsuarioDAO;
+import com.mycompany.porkycakes.Objetos.*;
 import java.util.HashMap;
 
 
@@ -18,6 +19,7 @@ import java.util.HashMap;
  * @author Luly
  */
 public class LoginControlador {
+    
  
     public static Route iniciarSesion = (Request request, Response response) -> {
         
@@ -35,8 +37,11 @@ public class LoginControlador {
             if (usuarioDAO.autenticarUsuario(username, password)) {
                 request.session(true);
                 request.session().attribute("username", username);
-                response.redirect("/login.vsl");
+                response.redirect("/verPedidos");
+                
+                LoginFacade.registrarInicioSesion(username);
             } else {
+                response.redirect("/login.vsl");
                 return "Credenciales incorrectas";
             }
         return null;

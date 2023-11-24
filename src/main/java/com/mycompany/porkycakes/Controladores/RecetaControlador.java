@@ -92,6 +92,7 @@ public class RecetaControlador {
         }
         //cuando carga el formulario esto hace que vuelva a la pagina principal para seguir cargando otro stock
         response.redirect("/crearReceta");
+        LoginFacade.registrarNuevaReceta(nombreReceta);
         return null;
     };
 }

@@ -21,9 +21,12 @@ public class UsuarioDAO {
     }
     
     public static int getRol(){
-        return usuario.getId_rol();
+        return usuario.getRol_id();
     }
     
+    public static void setUsuario(Usuario user){
+        usuario = user;
+    }
     
     public List<Usuario> selectAllUsuarios(){
         String selectAllSQL = "SELECT * FROM USUARIO;";
@@ -64,7 +67,7 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
         if(usuarios != null){
-            usuarios.get(0);
+            setUsuario(usuarios.get(0));
         }
         return usuarios != null && !usuarios.isEmpty();
     }

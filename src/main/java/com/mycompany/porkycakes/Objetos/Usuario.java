@@ -15,5 +15,5 @@ public class Usuario {
     
     private String nombre_usuario, contrasena;
     private String apellido, nombre;
-    private int id_rol;
+    private int rol_id;
 }

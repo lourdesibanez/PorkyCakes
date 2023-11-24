@@ -43,7 +43,10 @@ public class IngredienteControlador {
        
         //cuando carga el formulario esto hace que vuelva a la pagina principal para seguir cargando otro stock
        response.redirect("/cargarStock");
+       LoginFacade.registrarStock(codigo, cantidad);
        return null;
    };
+    
+    
     
 }

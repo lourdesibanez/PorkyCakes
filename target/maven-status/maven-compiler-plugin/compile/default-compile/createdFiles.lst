@@ -18,6 +18,7 @@ com\mycompany\porkycakes\Objetos\PedidoVista.class
 com\mycompany\porkycakes\Objetos\EstadosXPedido.class
 com\mycompany\porkycakes\Objetos\IngredientesXReceta.class
 com\mycompany\porkycakes\Objetos\ProductosXPedido.class
+com\mycompany\porkycakes\Objetos\LoginFacade.class
 com\mycompany\porkycakes\DAO\ProductoDAO.class
 com\mycompany\porkycakes\DAO\EstadosXPedidoDAO.class
 com\mycompany\porkycakes\Controladores\ListaControlador.class
