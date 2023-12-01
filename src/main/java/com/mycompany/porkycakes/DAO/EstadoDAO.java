@@ -4,7 +4,7 @@
  */
 package com.mycompany.porkycakes.DAO;
 
-import com.mycompany.porkycakes.Objetos.Estado;
+import com.mycompany.porkycakes.Objetos.*;
 import java.util.List;
 import org.sql2o.Connection;
 
@@ -14,9 +14,11 @@ import org.sql2o.Connection;
  */
 public class EstadoDAO {
     
-    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+     private final BaseDeDatosFactory bdF = new Sql2oDAOFactory(); //aca le digo que voy a trabajar con una bd de tipo sql2o
     
     public List<Estado> selectAllEstados(){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String selectAllSQL = "SELECT * FROM ESTADO;";
         List<Estado> estados = null;
         try(Connection con = bdDAO.getConnection()){
@@ -28,6 +30,8 @@ public class EstadoDAO {
     }
     
     public String getNombre(int id){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String selectAllSQL = "SELECT * FROM ESTADO WHERE id = :id;";
         List<Estado> estados = null;
         

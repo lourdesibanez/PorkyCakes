@@ -23,6 +23,7 @@ public class IngredienteControlador {
                 List<Ingrediente> ingredientes = iDAO.selectAllIngredientes();
                 HashMap model = new HashMap();
                 model.put("ingredientes",ingredientes);
+                 model.put("template","templates/actualizarStock.vsl");
                 return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/layout.vsl"));
            }else{
                HashMap model = new HashMap();
@@ -35,14 +36,14 @@ public class IngredienteControlador {
    };
            
     public static Route actualizarStock = (Request request, Response response) ->{
-       String cantidad = request.queryParams("");
-       String codigo = request.queryParams("");
+       String cantidad = request.queryParams("cantidad");
+       String codigo = request.queryParams("ingrediente");
        
        IngredienteDAO iDAO = new IngredienteDAO();
        iDAO.updateStock(Integer.parseInt(cantidad),Integer.parseInt(codigo));
        
         //cuando carga el formulario esto hace que vuelva a la pagina principal para seguir cargando otro stock
-       response.redirect("/cargarStock");
+       response.redirect("/actualizarStock");
        LoginFacade.registrarStock(codigo, cantidad);
        return null;
    };

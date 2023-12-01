@@ -19,14 +19,10 @@ import java.util.HashMap;
  * @author Luly
  */
 public class LoginControlador {
-    
- 
     public static Route iniciarSesion = (Request request, Response response) -> {
-        
         HashMap model = new HashMap();
         model.put("template", "templates/login.vsl");
         return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/login.vsl"));
-        
     };
     
      public static Route autenticarUsuario = (Request request, Response response) -> {
@@ -46,6 +42,5 @@ public class LoginControlador {
             }
         return null;
     };
-
 }
 

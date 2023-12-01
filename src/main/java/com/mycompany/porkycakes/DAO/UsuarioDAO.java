@@ -8,12 +8,13 @@ package com.mycompany.porkycakes.DAO;
  *
  * @author Luly
  */
-import com.mycompany.porkycakes.Objetos.Usuario;
+import com.mycompany.porkycakes.Objetos.*;
 import java.util.List;
 import org.sql2o.Connection;
 
 public class UsuarioDAO {
     protected static Usuario usuario;
+     private final BaseDeDatosFactory bdF = new Sql2oDAOFactory();
     
     //para que si el usuario no esta logueado retorne null y si esta logueado que te retorne ese usuario
     public static Usuario getUsuario(){
@@ -29,9 +30,11 @@ public class UsuarioDAO {
     }
     
     public List<Usuario> selectAllUsuarios(){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String selectAllSQL = "SELECT * FROM USUARIO;";
         List<Usuario> usuarios = null;
-        try(Connection con = Sql2oDAO.getSql2o().open()){
+        try(Connection con = bdDAO.getConnection()){
             usuarios = con.createQuery(selectAllSQL).executeAndFetch(Usuario.class);
         } catch(Exception e){
             e.printStackTrace();

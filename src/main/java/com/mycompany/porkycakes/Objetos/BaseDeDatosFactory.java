@@ -8,7 +8,7 @@ import com.mycompany.porkycakes.DAO.*;
 /**
  *
  * @author Luly
- */
+*/
 public abstract class BaseDeDatosFactory {
     public abstract BaseDeDatosDAO createBD();
 }

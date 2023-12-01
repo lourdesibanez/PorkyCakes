@@ -33,6 +33,7 @@ public class ListaControlador {
                 }
                 HashMap model = new HashMap();
                 model.put("ingredientes",ingredienteLista);
+                model.put("template","templates/listaGenerada.vsl");
                 return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/layout.vsl"));
            }else{
                HashMap model = new HashMap();

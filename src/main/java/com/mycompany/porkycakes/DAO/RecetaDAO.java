@@ -4,7 +4,7 @@
  */
 package com.mycompany.porkycakes.DAO;
 
-import com.mycompany.porkycakes.Objetos.Receta;
+import com.mycompany.porkycakes.Objetos.*;
 import java.util.List;
 import org.sql2o.Connection;
 
@@ -14,9 +14,11 @@ import org.sql2o.Connection;
  */
 public class RecetaDAO {
     
-    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+     private final BaseDeDatosFactory bdF = new Sql2oDAOFactory(); //aca le digo que voy a trabajar con una bd de tipo sql2o
     
     public List<Receta> selectAllRecetas(){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String selectAllSQL = "SELECT * FROM RECETA;";
         List<Receta> recetas = null;
         try(Connection con = bdDAO.getConnection()){
@@ -28,6 +30,8 @@ public class RecetaDAO {
     }
     
     public List<Receta> selectRecetasBase(){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String SQL = "SELECT * FROM RECETA WHERE codigo_producto IS NULL";
         List<Receta> recetasBase = null;
         try(Connection con = bdDAO.getConnection()){
@@ -47,7 +51,9 @@ public class RecetaDAO {
     }
     
     public int insert(Receta receta) {
-        try (Connection con = Sql2oDAO.getSql2o().open()) {
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
+        try (Connection con = bdDAO.getConnection()) {
             if(receta.getCodigo_producto() != 0){
                 String sql = "INSERT INTO RECETA (nombre, tiempo_prep, porciones, codigo_producto) "
                 + "VALUES (:nombre, :tiempo_prep, :porciones, :codigo_producto)";

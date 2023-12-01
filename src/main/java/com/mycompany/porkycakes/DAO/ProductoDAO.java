@@ -4,7 +4,7 @@
  */
 package com.mycompany.porkycakes.DAO;
 
-import com.mycompany.porkycakes.Objetos.Producto;
+import com.mycompany.porkycakes.Objetos.*;
 import java.util.List;
 import org.sql2o.Connection;
 
@@ -14,10 +14,12 @@ import org.sql2o.Connection;
  */
 public class ProductoDAO {
     
-    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+     private final BaseDeDatosFactory bdF = new Sql2oDAOFactory(); //aca le digo que voy a trabajar con una bd de tipo sql2o
     
     //aca hago la conexion a la bd buscando todos los productos
     public List<Producto> selectAllProductos(){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String selectAllSQL = "SELECT * FROM PRODUCTO;";
         List<Producto> productos = null;
         try(Connection con = bdDAO.getConnection()){
@@ -30,6 +32,8 @@ public class ProductoDAO {
     
     //aca hago lo mismo pero filtrando por codigo
     public float getPrecio(int codigo){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String selectSQL = "SELECT * FROM PRODUCTO WHERE codigo = :codigo;";
         List<Producto> productos = null;
         try(Connection con = bdDAO.getConnection()){

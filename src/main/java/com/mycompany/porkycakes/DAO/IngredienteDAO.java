@@ -4,7 +4,7 @@
  */
 package com.mycompany.porkycakes.DAO;
 
-import com.mycompany.porkycakes.Objetos.Ingrediente;
+import com.mycompany.porkycakes.Objetos.*;
 import java.util.List;
 import org.sql2o.Connection;
 
@@ -14,9 +14,11 @@ import org.sql2o.Connection;
  */
 public class IngredienteDAO {
     
-    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+     private final BaseDeDatosFactory bdF = new Sql2oDAOFactory(); //aca le digo que voy a trabajar con una bd de tipo sql2o
     
     public List<Ingrediente> selectAllIngredientes(){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String selectAllSQL = "SELECT * FROM INGREDIENTE;";
         List<Ingrediente> ingredientes = null;
         try(Connection con = bdDAO.getConnection()){
@@ -28,6 +30,8 @@ public class IngredienteDAO {
     }
     
     public void updateStock(int cantidad, int codigo){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String updateSQL = "UPDATE ingrediente SET cantidad =: cantidad WHERE codigo =: codigo";
         try(Connection con = bdDAO.getConnection()){
             con.createQuery(updateSQL).executeUpdate();

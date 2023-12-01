@@ -4,7 +4,7 @@
  */
 package com.mycompany.porkycakes.DAO;
 
-import com.mycompany.porkycakes.Objetos.RecetasBaseXReceta;
+import com.mycompany.porkycakes.Objetos.*;
 import org.sql2o.Connection;
 
 /**
@@ -13,9 +13,11 @@ import org.sql2o.Connection;
  */
 public class RecetasBaseXRecetaDAO {
     
-    private final BaseDeDatosDAO bdDAO = new Sql2oDAO(); //aca le digo que voy a trabajar con una bd de tipo sql2o
+     private final BaseDeDatosFactory bdF = new Sql2oDAOFactory(); //aca le digo que voy a trabajar con una bd de tipo sql2o
     
     public void insert(RecetasBaseXReceta rbxr){
+        BaseDeDatosDAO bdDAO = bdF.createBD();
+        
         String sql = "INSERT INTO RECETASBASEXRECETA "
             + "VALUES(:id_receta_principal, :id_receta_base)";
 
