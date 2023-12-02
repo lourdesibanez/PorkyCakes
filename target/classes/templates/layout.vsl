@@ -19,21 +19,22 @@
                 </div>
             </div>
         </nav>
+        <!-- sidebar nuevo-->
         <aside class="sidebar">
             <div class="logo">
-                <img class="logo__img" src="images/logo.png" alt="Logo">
+                <img class="logo__img" src="logo.png" alt="Logo">
                 <h1 class="logo__title">Porky Cakes</h1>
             </div>
             <div class="menu">
                 <ul>
                     <li class="">
-                        <a class="menu_item menu_item--disabled">
-                            <span class="material-symbols-outlined menu_icon menu_icon--disabled">
+                        <a class="menu__item menu__item--disabled">
+                            <span class="material-symbols-outlined menu__icon menu__icon--disabled">
                                 note_stack
                             </span>
-                            <span class="menu_p menu_p--disabled">
+                            <span class="menu__p menu__p--disabled">
                                 Recetas
-                                <span class="material-symbols-outlined menu_icon menu_icon--disabled">
+                                <span class="material-symbols-outlined menu__icon menu__icon--disabled">
                                     expand_more
                                 </span>
                             </span>
@@ -45,42 +46,42 @@
                 </ul>
                 <ul>
                     <li class="">
-                        <a class="menu_item menu_item--disabled">
-                            <span class="material-symbols-outlined menu_icon menu_icon--disabled">
+                        <a class="menu__item menu__item--disabled">
+                            <span class="material-symbols-outlined menu__icon menu__icon--disabled">
                                 fact_check
                             </span>
-                            <span class="menu_p menu_p--disabled">
+                            <span class="menu__p menu__p--disabled">
                                 Pedidos
-                                <span class="material-symbols-outlined menu_icon menu_icon--disabled">
+                                <span class="material-symbols-outlined menu__icon menu__icon--disabled">
                                     chevron_right
                                 </span>
                             </span>
                         </a>
                         <ul>
-                            <li><a class="menu_subitem menu_subitem--disabled" href="/verPedidos">Ver Pedidos</a>
+                            <li><a class="menu__subitem menu__subitem--disabled" href="/verPedidos">Ver Pedidos</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 <ul>
                     <li class="">
-                        <a class="menu_item menu_item--disabled">
-                            <span class="material-symbols-outlined menu_icon menu_icon--disabled">
+                        <a class="menu__item menu__item--disabled">
+                            <span class="material-symbols-outlined menu__icon menu__icon--disabled">
                                 fact_check
                             </span>
-                            <span class="menu_p menu_p--disabled">
+                            <span class="menu__p menu__p--disabled">
                                 Stock
-                                <span class="material-symbols-outlined menu_icon menu_icon--disabled">
+                                <span class="material-symbols-outlined menu__icon menu__icon--disabled">
                                     chevron_right
                                 </span>
                             </span>
                         </a>
                         <ul>
                             <li>
-                                <a class="menu_subitem menu_subitem--disabled" href="/cargarStock">Actualizar Stock</a>
+                                <a class="menu__subitem menu__subitem--disabled" href="/cargarStock">Actualizar Stock</a>
                             </li>
                             <li>
-                                <a class="menu_subitem menu_subitem--disabled" href="/generarListaCompras">Lista de Compras</a>
+                                <a class="menu__subitem menu__subitem--disabled" href="/generarListaCompras">Lista de Compras</a>
                             </li>
                         </ul>
                     </li>

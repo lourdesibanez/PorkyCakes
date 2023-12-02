@@ -30,21 +30,29 @@ public class IngredienteControlador {
                return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/sinPermisos.vsl"));
            }
        }else{
-           response.redirect("/iniciarSesion");
+           response.redirect("/login");
            return null;
        }
    };
            
     public static Route actualizarStock = (Request request, Response response) ->{
-       String cantidad = request.queryParams("cantidad");
-       String codigo = request.queryParams("ingrediente");
+       String[] cantidad = request.queryParamsValues("cantidad[]");
+       String[] codigo = request.queryParamsValues("ingrediente[]");
        
-       IngredienteDAO iDAO = new IngredienteDAO();
-       iDAO.updateStock(Integer.parseInt(cantidad),Integer.parseInt(codigo));
+       
+        if (cantidad != null && codigo != null && cantidad.length == codigo.length) {
+        IngredienteDAO iDAO = new IngredienteDAO();
+        for (int i = 0; i < cantidad.length; i++) {
+
+            int cant = Integer.parseInt(cantidad[i]);
+            int cod = Integer.parseInt(codigo[i]);
+            iDAO.updateStock(cant, cod);
+            LoginFacade.registrarStock(String.valueOf(cod), String.valueOf(cant));
+        }
+    }
        
         //cuando carga el formulario esto hace que vuelva a la pagina principal para seguir cargando otro stock
-       response.redirect("/actualizarStock");
-       LoginFacade.registrarStock(codigo, cantidad);
+       response.redirect("/cargarStock");
        return null;
    };
     

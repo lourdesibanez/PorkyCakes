@@ -32,9 +32,12 @@ public class IngredienteDAO {
     public void updateStock(int cantidad, int codigo){
         BaseDeDatosDAO bdDAO = bdF.createBD();
         
-        String updateSQL = "UPDATE ingrediente SET cantidad =: cantidad WHERE codigo =: codigo";
+        String updateSQL = "UPDATE ingrediente SET cantidad = cantidad + :cantidad WHERE codigo = :codigo";
         try(Connection con = bdDAO.getConnection()){
-            con.createQuery(updateSQL).executeUpdate();
+            con.createQuery(updateSQL)
+               .addParameter("cantidad", cantidad)
+               .addParameter("codigo", codigo)
+               .executeUpdate();
         } catch(Exception e){
             e.printStackTrace();
         }

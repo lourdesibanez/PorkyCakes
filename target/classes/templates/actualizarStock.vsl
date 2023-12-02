@@ -1,5 +1,5 @@
-            <div class="content">
-            <p class="breadcrum">Recetas / <span>Crear nueva receta</span></p>
+        <div class="content">
+            <p class="breadcrum">Stock / <span>Actualizar Stock</span></p>
             <form class="section" action="/actualizarStock" method="post">
                 <h2 class="section-title">Actualizar Stock</h2>
                 <div class="box">
@@ -8,6 +8,7 @@
                         <div class="form-ing__inputgroup nombre">
                             <label class="form-ing__label" for="ingrediente">Seleccione ingrediente:</label>
                             <select class="form-ing__input" name="ingrediente[]" id="item">
+                                <option value="9999" selected>-- Seleccione un ingrediente --</option>
                                 #foreach($i in $ingredientes)
                                     <option value=$i.getCodigo()>$i.getNombre()</option>
                                 #end
@@ -17,10 +18,10 @@
                             <label class="form-ing__label" for="cantidad">Cantidad</label>
                             <input class="form-ing__input" id="cantidad" type="text" name="cantidad[]">
                         </div>
-                        <div class="form-ing__inputgroup unidad">
+                        <!-- <div class="form-ing__inputgroup unidad">
                             <label class="form-ing__label" for="unidad">Unidad</label>
                             <input class="form-ing__input" id="unidad" type="text" name="unidad[]" disabled>
-                        </div>
+                        </div> -->
                         <div class="form-ing__inputgroup boton">
                             <p>&nbsp;</p>
                             <button class="form-ing__btn" id="add-item">Agregar</button>

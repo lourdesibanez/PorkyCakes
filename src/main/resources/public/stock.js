@@ -11,7 +11,7 @@
 
 
   var cantidad = document.getElementById("cantidad").value;
-  var unidad = document.getElementById("unidad").value;
+  //var unidad = document.getElementById("unidad").value;
 
 
   // Crea un nuevo elemento para los ingredientes
@@ -31,8 +31,8 @@
   var ingredientParagraph = document.createElement("p");
   ingredientParagraph.className = "ingredients-group__name";
   ingredientParagraph.innerHTML = '<select class="form-ing__input" name="ingrediente[]"><option selected value="' + ing + '">' + indexTxt + '</option>' + 
-      '<input type="text" name="cantidad[]" value="' + cantidad + '"> ' +
-      '<input type="text" name="unidad[]" value="' + unidad + '">';
+      '<input type="text" name="cantidad[]" value="' + cantidad + '">';
+    //  '<input type="text" name="unidad[]" value="' + unidad + '">';
 
   // Agrega el botón y el párrafo al grupo de ingredientes
   itemGroup.appendChild(deleteButton);
@@ -42,7 +42,7 @@
   document.getElementById("itemcitos").appendChild(itemGroup);
 
   // Resetear los valores de los campos de entrada
-  document.getElementById("item").value = "";
-  document.getElementById("cantidad").value = "";
-  document.getElementById("unidad").value = "";
+  document.getElementById("item").value = "9999";
+  document.getElementById("cantidad").value = "0";
+  //document.getElementById("unidad").value = "";
 });

@@ -5,9 +5,10 @@
                 <h2 class="section-title">Lista de compras</h2>
                 <div class="box">
                     <ul class="lista-compra">
-                        <li >Producto_faltante</li>
-                        <li >Producto_faltante</li>
-                        <li >Producto_faltante</li>
+                        <!--<li >Producto_faltante</li>-->
+                        #foreach($i in $ingredientes)
+                            <li>$i.getNombre()</li>
+                        #end
                     </ul>
                     <button  class="form-ing__btn form-ing__btn--save" onclick="imprimirLista()">Imprimir</button>
             </div>
