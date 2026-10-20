@@ -16,9 +16,14 @@ public class Sql2oDAO extends BaseDeDatosDAO{
     
     public static Sql2o getSql2o(){
         if(sql2o == null){
-            sql2o = new Sql2o("jdbc:mysql://localhost:3306/porkydb", "root", "");
+            sql2o = new Sql2o(env("DB_URL", "jdbc:mysql://localhost:3306/porkydb"), env("DB_USER", "root"), env("DB_PASS", ""));
         }
         return sql2o;
+    }
+
+    private static String env(String nombre, String valorPorDefecto){
+        String valor = System.getenv(nombre);
+        return valor != null ? valor : valorPorDefecto;
     }
 
     @Override

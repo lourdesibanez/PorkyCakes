@@ -15,7 +15,9 @@ import static spark.Spark.*;
 public class PorkyCakes {
 
     public static void main(String[] args) {
+        port(Integer.parseInt(System.getenv().getOrDefault("PORT", "4567")));
         staticFiles.location("/public");
+        get("/", (req, res) -> { res.redirect("/login"); return null; });
         get("/verPedidos", PedidoControlador.getPedidos);
         
         get("/crearReceta",RecetaControlador.crearReceta);

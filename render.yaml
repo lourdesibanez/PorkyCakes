@@ -1,0 +1,9 @@
+# Deploy de la demo en Render (plan gratis). La base MariaDB vive dentro del contenedor
+# y se recrea desde porkydb.sql en cada arranque.
+services:
+  - type: web
+    name: porkycakes-demo
+    runtime: docker
+    plan: free
+    branch: demo
+    healthCheckPath: /login

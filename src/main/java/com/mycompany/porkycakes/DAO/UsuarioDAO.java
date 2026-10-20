@@ -69,7 +69,7 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(usuarios != null){
+        if(usuarios != null && !usuarios.isEmpty()){
             setUsuario(usuarios.get(0));
         }
         return usuarios != null && !usuarios.isEmpty();

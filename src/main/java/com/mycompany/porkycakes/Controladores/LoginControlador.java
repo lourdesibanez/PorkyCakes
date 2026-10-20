@@ -37,7 +37,7 @@ public class LoginControlador {
                 
                 LoginFacade.registrarInicioSesion(username);
             } else {
-                response.redirect("/login.vsl");
+                response.redirect("/login");
                 return "Credenciales incorrectas";
             }
         return null;
